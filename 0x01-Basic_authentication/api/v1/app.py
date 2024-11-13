@@ -46,15 +46,15 @@ def not_found(error) -> str:
 def authenticate_user():
     """Authenticates a user before processing a request.
     """
-    if auth:
+    if auth: # type: ignore
         excluded_paths = [
             '/api/v1/status/',
             '/api/v1/unauthorized/',
             '/api/v1/forbidden/',
         ]
-        if auth.require_auth(request.path, excluded_paths):
-            auth_header = auth.authorization_header(request)
-            user = auth.current_user(request)
+        if auth.require_auth(request.path, excluded_paths): # type: ignore
+            auth_header = auth.authorization_header(request) # type: ignore
+            user = auth.current_user(request) # type: ignore
             if auth_header is None:
                 abort(401)
             if user is None:
