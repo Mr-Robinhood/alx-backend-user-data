@@ -43,4 +43,4 @@ def handle_logout():
     from api.v1.app import auth
     if auth.destroy_session(request):
         return jsonify({}), 200
-    abort(404)
+    abort(404)  # type: ignore
