@@ -30,6 +30,7 @@ elif AUTH_TYPE == "session_db_auth":
     from api.v1.auth.session_db_auth import SessionDBAuth
     auth = SessionDBAuth()
 
+
 @app.before_request
 def bef_req():
     """
@@ -50,13 +51,13 @@ def bef_req():
             cookie = None
             if hasattr(auth, "session_cookie"):
                 cookie = auth.session_cookie(request)
-            
+
             if auth.authorization_header(request) is None and cookie is None:
                 abort(401, description="Unauthorized")
             if auth.current_user(request) is None:
                 abort(403, description="Forbidden")
 
-                
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
